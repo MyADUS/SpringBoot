@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: JSPdemo
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: mayn
+Implementation-Vendor-Id: com.test
+Build-Jdk: 1.8.0_171
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/JSPdemo
+Created-By: Maven Integration for Eclipse
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+        <!--你接口的包名是com.abc.dao,接口名是NameMapper.java，那么你的mapper.xml的namespace应该是com.abc.dao.NameMapper-->
+<mapper namespace="com.test.dao.mapper.main.userMapper" >
+
+    <!--resultMap对应的是表与实体类的映射  - type 数据库表对应的实体类，别名或完整类名都可以-->
+    <resultMap id="BaseResultMap" type="com.test.model.user" >
+        <!-- 结果集的主键 -->
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <!-- 普通的列  -column 是数据库中字段， property是实体类中字段-->
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+        <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+        <result column="MANAGER" property="manager" jdbcType="VARCHAR" />
+        <result column="TRUENAME" property="truename" jdbcType="VARCHAR" />
+    </resultMap>
+
+	<sql id="Base_Column_List" >
+        id , password , username , manager , truename
+    </sql>
+    
+    <update id="updatePasswordByUsername">
+		UPDATE <!-- SPRINGBOOT_ -->USER SET PASSWORD = #{arg1} WHERE USERNAME = #{arg0}
+	</update>
+    
+    <select id="getByUsername" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM <!-- SPRINGBOOT_ -->USER
+		WHERE USERNAME=#{arg0}
+    </select>
+    
+    <update id="rePassword">
+		UPDATE <!-- SPRINGBOOT_ -->USER SET PASSWORD = #{arg1} WHERE ID = #{arg0}
+	</update>
+    
+    <select id="getUserByTwoName" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM <!-- SPRINGBOOT_ -->USER
+		WHERE USERNAME=#{arg1} OR TRUENAME=#{arg0}
+    </select>
+    
+    <select id="getCount0" resultType="Hashmap">
+    	SELECT COUNT(*)AS NUMS FROM <!-- SPRINGBOOT_ -->USER WHERE MANAGER=#{arg0}
+    </select>
+    
+    <select id="mapManager0" resultMap="BaseResultMap">
+    	SELECT
+    	<include refid="Base_Column_List"/>
+    	FROM <!-- SPRINGBOOT_ -->USER WHERE MANAGER=#{arg0}
+    </select>
+    
+    <update id="ShouQuan">
+		UPDATE <!-- SPRINGBOOT_ -->USER SET MANAGER = #{arg1} WHERE ID = #{arg0}
+	</update>
+	
+	<select id="mapManager" resultMap="BaseResultMap">
+    	SELECT
+    	<include refid="Base_Column_List"/>
+    	FROM <!-- SPRINGBOOT_ -->USER
+    </select>
+</mapper>

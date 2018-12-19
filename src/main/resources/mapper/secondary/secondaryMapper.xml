@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.dao.mapper.secondary.secondaryMapper" >
+
+    <!-- <resultMap id="BaseResultMap" type="com.test.model.user" >
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+        <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+        <result column="MANAGER" property="manager" jdbcType="VARCHAR" />
+        <result column="TRUENAME" property="truename" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+        id , password , username , manager , truename
+    </sql> -->
+    
+    <update id="setSecondary">
+		UPDATE USER SET MANAGER = 1 WHERE MANAGER = 0
+    </update>
+    
+    <select id="getSecondary" resultType="map">
+    	SELECT * FROM USER
+    </select>
+    
+</mapper>

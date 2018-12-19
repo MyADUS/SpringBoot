@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "mapper.not-empty",
+    "type": "java.lang.String",
+    "description": "A description for 'mapper.not-empty'"
+  },
+  {
+    "name": "mapper.mappers",
+    "type": "java.lang.String",
+    "description": "A description for 'mapper.mappers'"
+  },
+  {
+    "name": "mapper.identity",
+    "type": "java.lang.String",
+    "description": "A description for 'mapper.identity'"
+  },
+  {
+    "name": "spring.view.prefix",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.view.prefix'"
+  },
+  {
+    "name": "spring.view.suffix",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.view.suffix'"
+  },
+  {
+    "name": "spring.datasource.main.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.main.url'"
+  }
+]}
