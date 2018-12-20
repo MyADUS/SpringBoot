@@ -22,7 +22,7 @@
 			<label class="layadmin-user-login-icon layui-icon layui-icon-auz" style="color: #1E9FFF;"></label>
 			<div class="layui-form-item">
 				<input type="text" name="imagecode" id="imagecode" lay-verify="required" placeholder="请输入验证码" class="layui-input" style="width:75%;float: left;">
-				<img id="img" alt="验证码" title="点击更换验证码" src="<%=basePath%>imageCode" style="width: 20%;height: 5.2%;margin-left: 5%;" onclick="imageCode()"/>
+				<img id="img" alt="验证码" title="点击更换验证码" src="<%=basePath%>noneed/imageCode" style="width: 20%;height: 5.2%;margin-left: 5%;" onclick="imageCode()"/>
 			</div>
 		</div>
 		<div class="layui-form-item" align="center">
@@ -53,7 +53,7 @@
 			form.on('submit(submit)', function(data){
 				
 				$.ajax({
-					url: "<%=basePath%>toLogin",
+					url: "<%=basePath%>noneed/toLogin",
 					data: data.field,
 					type: "POST",
 					cache: false,
@@ -65,6 +65,7 @@
 								location.href = "<%=basePath%>jsp/views/index.jsp";
 							});
 						}else{
+							imageCode();
 							parent.layer.msg(res,{icon: 5, anim: 6});
 						}
 					},
@@ -75,7 +76,7 @@
 		});
 		
 		function imageCode(){
-			$("#img").attr("src","<%=basePath%>imageCode?date="+Math.random())
+			$("#img").attr("src","<%=basePath%>noneed/imageCode?date="+Math.random())
 		};
 	</script>
 </body>
