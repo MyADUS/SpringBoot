@@ -60,7 +60,7 @@
 			form.on('submit(submit)', function(data) {
 
 				$.ajax({
-					url : "<%=basePath%>updatePassword",
+					url : "<%=basePath%>noneed/updatePassword",
 					data : data.field,
 					type : "POST",
 					cache : false,
