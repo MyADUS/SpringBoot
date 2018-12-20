@@ -49,7 +49,7 @@ public class userController {
     private RedisService redisService;
 	
 	//登录
-	@RequestMapping(value = "/toLogin")
+	@RequestMapping(value = "/noneed/toLogin")
 	public String toLogin(String username,String password,String imagecode) throws Exception {
 		//1.获取Subject
 		Subject subject = SecurityUtils.getSubject();
@@ -87,7 +87,7 @@ public class userController {
 	}
 	
 	//修改密码
-	@RequestMapping(value = "/updatePassword")
+	@RequestMapping(value = "/noneed/updatePassword")
 	public String updatePassword(String username,String password,String newpassword,String imagecode) throws Exception {
 		String value = toLogin(username,password,imagecode);
 		String i = null;
@@ -105,7 +105,7 @@ public class userController {
 	}
 
 	//头部，个人信息页面修改操作，查询赋值
-	@RequestMapping(value="/getUserself")
+	@RequestMapping(value="/noneed/getUserself")
 	public user getUserself() throws Exception{
 		Subject subject = SecurityUtils.getSubject();
 		user user = (user)subject.getPrincipal();
@@ -131,7 +131,7 @@ public class userController {
     }
 	
 	//新用户注册
-	@RequestMapping(value = "/user_newPerson")
+	@RequestMapping(value = "/noneed/user_newPerson")
 	public String user_newPerson(user user, String imagecode) throws Exception {
 		String truename = user.getTruename();
 		String username = user.getUsername();
@@ -211,7 +211,7 @@ public class userController {
   		return str;
 	}
 	
-	@RequestMapping(value = "/imageCode")
+	@RequestMapping(value = "/noneed/imageCode")
 	public void imageCode() throws Exception{
 		Object[] obj = ImageCode.createImage();
 		session.setAttribute("imagecode", obj[0]);
@@ -221,7 +221,7 @@ public class userController {
 		ImageIO.write(img, "png", os);
 	}
 	
-	@RequestMapping(value="/sss")
+	@RequestMapping(value="/noneed/sss")
 	public String sss() throws Exception{
 		user user = userService.sss();
 		String jsonString = JSONObject.toJSONString(user);
