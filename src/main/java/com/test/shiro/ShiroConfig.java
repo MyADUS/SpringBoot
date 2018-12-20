@@ -39,7 +39,13 @@ public class ShiroConfig {
 		 * 		roles:该资源必须得到角色权限才可以访问
 		 */
 		Map<String, String> filterMap = new LinkedHashMap<String, String>();
+		// 对直接请求后台方法进行拦截
+		// 先对验证码等无需登录即可访问的方法设置无需拦截
+		filterMap.put("/noneed/*", "anon");
+		// 防止直接调用后台方法对数据库进行操作
+		filterMap.put("/*", "authc");
 		// 对多级别jsp页面进行拦截
+		// 防止未登录状态访问部分页面
 		filterMap.put("/jsp/views/**", "authc");
 		filterMap.put("/jsp/upload.jsp", "authc");
 		//资源授权
