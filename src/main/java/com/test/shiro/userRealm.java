@@ -47,7 +47,7 @@ public class userRealm extends AuthorizingRealm{
 		/*Subject subject = SecurityUtils.getSubject();
 		user user1 = (user)subject.getPrincipal();*/
 		user user = (user) arg0.getPrimaryPrincipal();
-		// use1与user1 完全相同
+		// user与user1 完全相同
 		//资源授权
 		//info.addStringPermission(userTest.getManager()+"");
 		//角色授权
