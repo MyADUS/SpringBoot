@@ -4,6 +4,12 @@
 <%@page import="org.apache.shiro.subject.Subject"%>
 <%@page import="com.test.model.user"%>
 <%@include file="../public/public.jsp" %>
+<%
+	Subject subject = SecurityUtils.getSubject();
+	user user = (user)subject.getPrincipal();
+	String username = user.getUsername();
+	String truename = user.getTruename();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +22,7 @@
 		class="layadmin-user-login-box layadmin-user-login-body layui-form"  style="width: 33%;margin-left: 33%;margin-top: 10%;">
 		<div class="layui-form-item" align="center">
 			<label class="layadmin-user-login-icon layui-icon layui-icon-username" style="color: #1E9FFF;"></label>
-			<input type="text" name="username" id="username" lay-verify="required" placeholder="用户名" class="layui-input">
+			<input type="text" name="username" id="username" lay-verify="required" placeholder="用户名" value="<%=username %>" readonly="readonly" class="layui-input">
 		</div>
 		<div class="layui-form-item" align="center">
 			<label class="layadmin-user-login-icon layui-icon layui-icon-password" style="color: #1E9FFF;"></label>
@@ -25,6 +31,13 @@
 		<div class="layui-form-item" align="center">
 			<label class="layadmin-user-login-icon layui-icon layui-icon-password" style="color: #1E9FFF;"></label>
 			<input type="password" name="newpassword" id="newpassword" lay-verify="required" placeholder="新密码" class="layui-input">
+		</div>
+		<div class="layui-form-item" align="center">
+			<label class="layadmin-user-login-icon layui-icon layui-icon-auz" style="color: #1E9FFF;"></label>
+			<div class="layui-form-item">
+				<input type="text" name="imagecode" id="imagecode" lay-verify="required" placeholder="请输入验证码" class="layui-input" style="width:60%;float: left;">
+				<img id="img" alt="验证码" title="点击更换验证码" src="<%=basePath%>noneed/imageCode" style="width: 35%;height: 8%;margin-left: 5%;" onclick="imageCode()"/>
+			</div>
 		</div>
 		<div class="layui-form-item" align="center">
 			<span class="layui-btn layui-btn-normal" lay-submit lay-filter="submit">确认修改</span>
@@ -40,7 +53,7 @@
 			//监听提交
 			form.on('submit(submit)', function(data) {
 				$.ajax({
-					url : "<%=basePath%>updatePassword",
+					url : "<%=basePath%>noneed/updatePassword",
 					data : data.field,
 					type : "POST",
 					cache : false,
@@ -48,7 +61,7 @@
 					success : function(res) {
 						if (res == "success") {
 							//登入成功的提示与跳转
-							parent.layer.alert("修改密码成功！",{title: "系统提示",icon: 1,closeBtn: 0},function(){
+							parent.layer.alert("修改密码成功！请刷新页面，重新登录。",{title: "系统提示",icon: 1,closeBtn: 0},function(){
 								cancel();
 								location.href = "<%=basePath%>jsp/login.jsp";
 							});
@@ -64,9 +77,14 @@
 			});
 
 		});
+		
 		//取消按钮
 		function cancel(){
 			parent.layer.closeAll();
+		};
+		
+		function imageCode(){
+			$("#img").attr("src","<%=basePath%>noneed/imageCode?date="+Math.random())
 		};
 	</script>
 </body>
