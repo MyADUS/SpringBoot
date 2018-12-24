@@ -19,13 +19,13 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="width: 120px;">真实姓名</label>
 			<div class="layui-input-inline">
-       			<input id="name" name="truename" placeholder="姓名" style="width:400px" class="layui-input" lay-verify="required">
+       			<input id="truename" name="truename" placeholder="姓名" style="width:400px" class="layui-input" lay-verify="required">
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label" style="width: 120px;">真实姓名</label>
+			<label class="layui-form-label" style="width: 120px;">用户名</label>
 			<div class="layui-input-inline">
-       			<input id="name" name="username" placeholder="姓名" style="width:400px" class="layui-input" lay-verify="required">
+       			<input id="username" name="username" placeholder="用户名" style="width:400px" class="layui-input" lay-verify="required">
 			</div>
 		</div>
 		<br/>
@@ -46,10 +46,11 @@
 		layui.use(['form'],function(){
 			//获取form表单信息
 			var form = layui.form;
+			var $ = layui.$;
 			
 			//查询个人信息
 			$.ajax({
-				url: "<%=basePath%>getUserself",
+				url: "<%=basePath%>noneed/getUserself",
 				type: "post",
 				cache: false,
 				async: false,
@@ -76,14 +77,14 @@
 				$(".layui-btn layui-btn-normal").addClass("layui-btn-disabled");
 				
 				$.ajax({
-					url: "<%=basePath%>updateOrAdd",
+					url: "<%=basePath%>updateOrAddUser",
 					data: data.field,
 					type: "POST",
 					cache: false,
 					async: false,
 					success: function(res){
 						if(res == "yes"){
-							parent.layer.alert("保存成功！",{title: "系统提示",icon: 1,closeBtn: 0},function(){
+							parent.layer.alert("保存成功！请刷新页面，重新登录。",{title: "系统提示",icon: 1,closeBtn: 0},function(){
 								cancel();
 							});
 						}else{
@@ -100,6 +101,7 @@
 		function cancel(){
 			parent.layer.closeAll();
 		};
+		
 	</script>
 
 </body>
