@@ -1,7 +1,5 @@
 /**
- * @author: 张跃帅
  * @notes: 给form表单赋值
- * @date: 2017年12月12日
  */
 (function(){
 	var formSetData = function(options){
