@@ -4,7 +4,6 @@ package com.test.util;
  * 
 * @ClassName: SystemConstant
 * @Description: TODO(系统静态常量,系统公用常量值,都在这里进行定义,名称大写,拼接字母用 _ 连接)
-* @author zhuweishi
 * @date 2017年9月19日 上午11:54:46
 *
  */
