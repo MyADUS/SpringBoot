@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+        <!--你接口的包名是com.abc.dao,接口名是NameMapper.java，那么你的mapper.xml的namespace应该是com.abc.dao.NameMapper-->
+<mapper namespace="com.test.dao.mapper.main.LogMapper" >
+
+    <!--resultMap对应的是表与实体类的映射  - type 数据库表对应的实体类，别名或完整类名都可以-->
+    <resultMap id="BaseResultMap" type="com.test.model.Log" >
+        <!-- 结果集的主键 -->
+        <id column="ID" property="id" jdbcType="INTEGER" />
+        <!-- 普通的列  -column 是数据库中字段， property是实体类中字段-->
+        <result column="IP" property="ip" jdbcType="VARCHAR" />
+        <result column="METHOD" property="method" jdbcType="VARCHAR" />
+        <result column="ISLOGIN" property="islogin" jdbcType="VARCHAR" />
+        <result column="CZR" property="czr" jdbcType="VARCHAR" />
+        <result column="CZRQ" property="czrq" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+	<sql id="Base_Column_List" >
+        id , ip , islogin , method , czr , czrq
+    </sql>
+    
+    <select id="getloginlog" resultMap="BaseResultMap">
+    	SELECT
+    	<include refid="Base_Column_List"/>
+    	FROM LOG WHERE ISLOGIN = 1 
+    	<if test="_parameter != null and _parameter != ''">
+    		AND (CZR LIKE "%"#{_parameter}"%" OR IP LIKE "%"#{_parameter}"%")
+    	</if>
+    	ORDER BY CZRQ DESC
+    </select>
+    
+    <select id="getcaozuolog" resultMap="BaseResultMap" parameterType="string">
+    	SELECT
+    	<include refid="Base_Column_List"/>
+    	FROM LOG WHERE ISLOGIN = 0 
+    	<if test="_parameter != null and _parameter != ''">
+    		AND (CZR LIKE "%"#{_parameter}"%" OR IP LIKE "%"#{_parameter}"%")
+    	</if>
+    	ORDER BY CZRQ DESC
+    </select>
+    
+</mapper>
