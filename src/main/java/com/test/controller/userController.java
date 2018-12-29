@@ -3,6 +3,7 @@ package com.test.controller;
 import java.awt.image.BufferedImage;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,10 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.test.dao.mapper.main.LogMapper;
+import com.test.model.Log;
 import com.test.model.user;
+import com.test.model.userTest;
 import com.test.service.RedisService;
 import com.test.service.userService;
 import com.test.util.ImageCode;
+import com.test.util.RedisUpdate;
 import com.test.util.ShaUtil;
 import com.test.util.getResult;;
 
@@ -34,6 +39,9 @@ public class userController {
 	
 	@Autowired
 	private userService userService;
+	
+	@Autowired
+	private LogMapper logmapper;
 	
 	@Autowired
     private HttpSession session;
@@ -48,6 +56,10 @@ public class userController {
 	@Autowired
     private RedisService redisService;
 	
+	// 注入更新缓存的方法
+	@Autowired
+	private RedisUpdate redisUpdate;
+		
 	//登录
 	@RequestMapping(value = "/noneed/toLogin")
 	public String toLogin(String username,String password,String imagecode) throws Exception {
@@ -62,6 +74,14 @@ public class userController {
 			if(imagecode.toLowerCase().equals(session.getAttribute("imagecode").toString().toLowerCase())) {
 				System.out.println("执行登录方法。。。");
 				subject.login(token);
+				//登录成功，进行日志记录
+				Log log = new Log();
+				log.setIp(request.getRemoteAddr());
+				log.setIslogin("1");
+	            log.setMethod("登录");
+	            log.setCzr(username);
+	            log.setCzrq(new Date());
+				logmapper.insert(log);
 				//session.setAttribute("username", username);
 				return "yes";
 			}else {
@@ -94,6 +114,7 @@ public class userController {
 		if(value == "yes") {
 			int s = userService.updatePasswordByUsername(username,ShaUtil.shaEncode(newpassword));
 			if(s > 0) {
+				logout();
 				i = "success";
 			}else {
 				i = "密码更改失败！";
@@ -103,7 +124,7 @@ public class userController {
 		}
 		return i;
 	}
-
+	
 	//头部，个人信息页面修改操作，查询赋值
 	@RequestMapping(value="/noneed/getUserself")
 	public user getUserself() throws Exception{
@@ -122,6 +143,7 @@ public class userController {
 			int t = userService.rePassword(id,password);
 			if(t>0) {
 				//logger.info("成功删除id为"+id);
+				redisUpdate.redisUpdate("mapManagerList");
 				d = d+1;
 			}else {
 				return -1;
@@ -143,6 +165,7 @@ public class userController {
 				user.setPassword(ShaUtil.shaEncode(user.getPassword()));
 				int i = userService.newPerson(user);
 				if(i>0) {
+					redisUpdate.redisUpdate("mapManagerList");
 					str = "success";
 				}else {
 					str = "注册失败，请重试！！！";
@@ -203,6 +226,7 @@ public class userController {
 		if(id > 0) {
 			int i = userService.ShouQuan(id,manager);
 			if(i > 0) {
+				redisUpdate.redisUpdate("mapManagerList");
 				str = "yes";
 			}else {
 				str = "授权失败！";
@@ -210,6 +234,27 @@ public class userController {
 		}
   		return str;
 	}
+	
+	//添加或更新操作
+	@RequestMapping("/updateOrAddUser")
+	public String updateOrAddUser(user user) throws Exception{
+		int i = 0;
+		Date time = new Date();
+		if(user.getId() != null) {
+			i = userService.update(user);
+		}else {
+			i = userService.add(user);
+		}
+		if(i > 0) {
+			redisUpdate.redisUpdate("mapManagerList");
+			//更改成功后，调用logout方法，重新登录，以确保shiro认证中的token信息正确显示
+			logout();
+			//redisUpdate("mapPerson");
+			return "yes";
+		}else {
+			return "no";
+		}
+    }
 	
 	@RequestMapping(value = "/noneed/imageCode")
 	public void imageCode() throws Exception{
