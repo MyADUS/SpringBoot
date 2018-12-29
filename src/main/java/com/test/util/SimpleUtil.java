@@ -1,11 +1,3 @@
- /**
- * @Author: 朱卫士
- * @Createtime: 2017年11月21日 下午5:29:27
- * @Copyright: Copyright (c) 2016
- * @Company: 北京永杰友信科技有限公司
- * @Version：1.0
- * @Description: 
- */
 package com.test.util;
 
 import java.text.ParseException;
