@@ -1,12 +1,3 @@
- /**
- * @Author: 朱卫士
- * @Createtime: 2018年3月28日 上午9:40:15
- * @Copyright: Copyright (c) 2016
- * @Company: 北京永杰友信科技有限公司
- * @Version：1.0
- * @Description: 行政许可导出
- * 					> 发改委
- */
 package com.test.util;
 
 import java.io.File;
