@@ -36,7 +36,7 @@ public class ShaUtil {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-    	String str = new String("zlxyxx888");
+    	String str = new String("000000");
         System.out.println("原始：" + str);
         System.out.println("SHA后：" + shaEncode(str));
 	}
