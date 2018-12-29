@@ -1,11 +1,3 @@
- /**
- * @Author: 朱卫士
- * @Createtime: 2017年10月24日 上午10:06:55
- * @Copyright: Copyright (c) 2016
- * @Company: 北京永杰友信科技有限公司
- * @Version：1.0
- * @Description: 
- */
 package com.test.util;
 
 import java.util.ArrayList;
