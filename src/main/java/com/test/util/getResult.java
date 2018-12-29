@@ -7,7 +7,6 @@ import java.util.List;
 /**
 * @ClassName: getResult
 * @Description: TODO(分页公共方法)
-* @author zhuweishi
 * @date 2017年10月24日 上午10:10:04
 *
  */
