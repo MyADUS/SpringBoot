@@ -88,7 +88,7 @@
 				choose: function(obj){
 					obj.preview(function(index, file, result){
 						$('#img').empty();
-			        	$('#img').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">');
+			        	$('#img').append('<img height="90" src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">');
 			        	showhide();
 					});
 				},
@@ -122,7 +122,7 @@
 				method: 'POST',
 				multiple: true,
 				number: 3,
-				choose: function(obj){debugger;
+				choose: function(obj){
 					if(i == 6){
 						parent.layer.msg("一次最多上传三个文件！");
 					}else{
