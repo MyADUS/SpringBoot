@@ -19,6 +19,7 @@ import com.test.dao.mapper.main.LogMapper;
 import com.test.model.Log;
 import com.test.model.user;
 import com.test.service.LogService;
+import com.test.util.getRealIp;
 
 /**
 * 日志切面
@@ -34,6 +35,10 @@ public class AopConfig {
 	@Autowired
 	private LogMapper logmapper;
 	
+	// 获取真实ip地址（貌似不管用）
+	@Autowired
+	private getRealIp getRealIp;
+		
 	/*除了@Around外，
 	每个方法里都可以加或者不加参数JoinPoint，
 	如果有用JoinPoint的地方就加，不加也可以，
@@ -70,7 +75,8 @@ public class AopConfig {
 	            
 	            //向log表中存储信息记录各用户进行了什么操作
 	            Log log = new Log();
-	            log.setIp(request.getRemoteAddr());
+	            //log.setIp(request.getRemoteAddr());
+	            log.setIp(getRealIp.RealIp());
 	            log.setIslogin("0");
 	            log.setMethod(joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
 	            log.setCzr(username);
