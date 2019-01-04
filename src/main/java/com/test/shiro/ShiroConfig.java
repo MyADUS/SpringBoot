@@ -3,11 +3,16 @@ package com.test.shiro;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.shiro.codec.Base64;
+import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.SimpleCommandLinePropertySource;
 
 /**
  * 
@@ -18,6 +23,26 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ShiroConfig {
 
+	
+	//rememberme无效	暂时不用
+	/*public SimpleCookie remembermeCookie() {
+		System.out.println("4");
+		//这个参数是cookie的名称，对应前端的checkbox的name = rememberme
+		SimpleCookie simpleCookie = new SimpleCookie("rememberme");
+		//<!-- 记住我cookie生效时间30天 ,单位秒;-->
+		simpleCookie.setMaxAge(2592000);
+		return simpleCookie;
+	}
+	
+	@Bean
+	public CookieRememberMeManager rememberMeManager(){
+	    CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+	    cookieRememberMeManager.setCookie(remembermeCookie());
+	    //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
+	    cookieRememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
+	    return cookieRememberMeManager;
+	}*/
+		
 	/**
 	 * 
 	 * 创建ShiroFilterFactoryBean
@@ -69,6 +94,8 @@ public class ShiroConfig {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		//关联Realm
 		securityManager.setRealm(userRealm);
+		
+		//securityManager.setRememberMeManager(rememberMeManager());
 		return securityManager;
 	}
 	
@@ -81,4 +108,5 @@ public class ShiroConfig {
 		System.out.println("3");
 		return new userRealm();
 	}
+	
 }
