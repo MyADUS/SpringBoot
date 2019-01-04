@@ -21,17 +21,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.test.dao.mapper.main.LogMapper;
 import com.test.model.Log;
 import com.test.model.user;
-import com.test.model.userTest;
 import com.test.service.RedisService;
 import com.test.service.userService;
 import com.test.util.ImageCode;
 import com.test.util.RedisUpdate;
 import com.test.util.ShaUtil;
+import com.test.util.StringUtil;
+import com.test.util.getRealIp;
 import com.test.util.getResult;;
 
 @RestController
@@ -59,16 +59,21 @@ public class userController {
 	// 注入更新缓存的方法
 	@Autowired
 	private RedisUpdate redisUpdate;
+	
+	// 获取真实ip地址（貌似不管用）
+	@Autowired
+	private getRealIp getRealIp;
 		
 	//登录
 	@RequestMapping(value = "/noneed/toLogin")
-	public String toLogin(String username,String password,String imagecode) throws Exception {
+	public String toLogin(String username,String password,String imagecode/*,String rememberme*/) throws Exception {
+		//boolean rememberme = !StringUtil.isNullOrEmpty(request.getParameter("rememberme"));
 		//1.获取Subject
 		Subject subject = SecurityUtils.getSubject();
 		//对密码进行加密
 		//ShaUtil.shaEncode(password);
 		//2.封装用户数据
-		UsernamePasswordToken token = new UsernamePasswordToken(username,ShaUtil.shaEncode(password));
+		UsernamePasswordToken token = new UsernamePasswordToken(username,ShaUtil.shaEncode(password)/*,rememberme*/);
 		//3.执行登录方法
 		try {
 			if(imagecode.toLowerCase().equals(session.getAttribute("imagecode").toString().toLowerCase())) {
@@ -76,7 +81,8 @@ public class userController {
 				subject.login(token);
 				//登录成功，进行日志记录
 				Log log = new Log();
-				log.setIp(request.getRemoteAddr());
+				//log.setIp(request.getRemoteAddr());
+				log.setIp(getRealIp.RealIp());
 				log.setIslogin("1");
 	            log.setMethod("登录");
 	            log.setCzr(username);
