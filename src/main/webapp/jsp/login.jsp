@@ -4,11 +4,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style type="text/css">
+/* .layui-form-checkbox span {
+height: 0%;
+} */
+.layui-form-checkbox[lay-skin=primary] i {
+top:0;
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录页面</title>
 </head>
-<body style="background-color: pink;">
-	<h2 style="color: #ff0000;" align="center">难受还是我难受啊</h2>
+<body>
 	<div class="layadmin-user-login-box layadmin-user-login-body layui-form" style="width: 33%;margin-left: 33%;margin-top: 10%;">
 		<div class="layui-form-item" align="center">
 			<label class="layadmin-user-login-icon layui-icon layui-icon-username" style="color: #1E9FFF;"></label>
@@ -25,6 +32,12 @@
 				<img id="img" alt="验证码" title="点击更换验证码" src="<%=basePath%>noneed/imageCode" style="width: 20%;height: 5.2%;margin-left: 5%;" onclick="imageCode()"/>
 			</div>
 		</div>
+		<!-- <div class="layui-form-item" style="float: right;">
+			<label class="layui-form-label">记住密码</label>
+			<div class="layui-input-block">
+				<input type="checkbox" name="rememberme" lay-skin="primary"> 
+			</div>
+		</div> -->
 		<div class="layui-form-item" align="center">
 			<span id="submit" class="layui-btn layui-btn-normal" lay-submit lay-filter="submit">登录</span>
 		</div>
@@ -51,6 +64,9 @@
 			
 			//监听提交
 			form.on('submit(submit)', function(data){
+				
+				//点击按钮之后，调用刷新验证码方法，防止多次点击按钮，多次调用登录方法
+				$("#submit").attr("disabled",true);
 				
 				$.ajax({
 					url: "<%=basePath%>noneed/toLogin",
