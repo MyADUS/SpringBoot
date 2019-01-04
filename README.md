@@ -9,4 +9,3 @@ SpringBoot测试项目：
     4、利用SpringBoot自带的Schedule进行了简单的定时操作。
     5、完成了SpringBoot整合多数据源、实现可对多个不同数据库，进行数据操作（本测试项目中，测试了主数据源为MySql，次数据源为DM；之后均更改为MySql）。
     等等。
-  小白操作，瑕疵颇多，尽请见谅。
