@@ -15,18 +15,24 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="width: 120px;">拦截方法</label>
 			<div class="layui-input-inline">
-       			<input id="filter" name="filter" placeholder="拦截方法" style="width:220px" class="layui-input" lay-verify="required">
+       			<input name="filter" placeholder="拦截方法" style="width:220px" class="layui-input" lay-verify="required">
 			</div>
 			<label class="layui-form-label">排序</label>
 			<div class="layui-input-inline">
-       			<input id="px" name="px" placeholder="排序" style="width:222px" class="layui-input" lay-verify="isnumber">
+       			<input name="px" placeholder="排序" style="width:222px" class="layui-input" lay-verify="isnumber">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label" style="width: 120px;">拦截路径</label>
 			<div class="layui-input-inline">
-       			<input id="url" name="url" placeholder="拦截路径" style="width:533px" class="layui-input" lay-verify="required">
+       			<input name="url" placeholder="拦截路径" style="width:533px" class="layui-input" lay-verify="required">
 			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label" style="width: 120px;">备注</label>
+			<div class="layui-input-inline" style="width:533px" >
+       			<textarea name="bz" placeholder="请输入内容" class="layui-textarea" lay-verify="required"></textarea>
+     		</div>
 		</div>
 		<br/>
 		<br/>
