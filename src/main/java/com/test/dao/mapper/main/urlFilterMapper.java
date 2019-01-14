@@ -7,7 +7,7 @@ import com.test.model.urlFilter;
 
 public interface urlFilterMapper extends MyMapper<urlFilter>{
 
-	List getUrlFilter();
+	List getUrlFilter(String param);
 
 	/*int deleteUrlFilter(int id);*/
 
