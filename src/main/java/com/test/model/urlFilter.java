@@ -28,6 +28,8 @@ public class urlFilter {
 	
 	private Integer px;
 	
+	private String bz;
+	
 	private String czr;
 	
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")
@@ -65,6 +67,14 @@ public class urlFilter {
 		this.px = px;
 	}
 
+	public String getBz() {
+		return bz;
+	}
+
+	public void setBz(String bz) {
+		this.bz = bz;
+	}
+
 	public String getCzr() {
 		return czr;
 	}
@@ -81,12 +91,13 @@ public class urlFilter {
 		this.czrq = czrq;
 	}
 
-	public urlFilter(Integer id, String url, String filter, Integer px, String czr, Date czrq) {
+	public urlFilter(Integer id, String url, String filter, Integer px, String bz, String czr, Date czrq) {
 		super();
 		this.id = id;
 		this.url = url;
 		this.filter = filter;
 		this.px = px;
+		this.bz = bz;
 		this.czr = czr;
 		this.czrq = czrq;
 	}
