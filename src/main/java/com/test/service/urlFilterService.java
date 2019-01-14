@@ -13,9 +13,9 @@ public class urlFilterService {
 	@Autowired
 	private urlFilterMapper urlFilterMapper;
 
-	public List getUrlFilter() {
+	public List getUrlFilter(String param) {
 		// TODO Auto-generated method stub
-		return urlFilterMapper.getUrlFilter();
+		return urlFilterMapper.getUrlFilter(param);
 	}
 
 	public int updateUrlFilter(urlFilter urlfilter) {
