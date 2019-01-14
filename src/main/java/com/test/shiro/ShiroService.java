@@ -22,7 +22,7 @@ public class ShiroService{
 	
 	public Map<String, String> loadFilterChainDefinitions() {
 		Map<String, String> filterMap = new LinkedHashMap<String, String>();
-		List list = urlFilterService.getUrlFilter();
+		List list = urlFilterService.getUrlFilter("");
 		for(int i=0;i<list.size();i++) {
 			urlFilter urlfilter = (urlFilter) list.get(i);
 			filterMap.put(urlfilter.getUrl(), urlfilter.getFilter());
