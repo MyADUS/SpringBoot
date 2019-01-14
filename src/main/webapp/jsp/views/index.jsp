@@ -28,7 +28,7 @@
 						</a>
 					</li>
 					<li class="layui-nav-item layui-hide-xs" lay-unselect>
-						<a href="fly/views/index.jsp" target="_blank" title="前台">
+						<a href="javascript:alert('没有');" target="_blank" title="前台">
 							<i class="layui-icon layui-icon-website"></i>
 						</a>
 					</li>
@@ -97,6 +97,35 @@
 									</shiro:hasRole>
 									<dl class="layui-nav-child">
 										<dd><a lay-href="<%=basePath%>jsp/views/user/shouquan.jsp">管理员操作</a></dd>
+									</dl>
+								</shiro:hasAnyRoles>
+			           		</li>
+			           	</shiro:hasAnyRoles>
+			           	<shiro:hasAnyRoles name="1,2">
+			           		<li class="layui-nav-item">
+								<a href="javascript:;" lay-tips="拦截单元" lay-direction="2">
+									<i class="layui-icon">&#xe64d;</i>
+									<cite>拦截菜单</cite>
+								</a>
+									<dl class="layui-nav-child">
+										<dd><a lay-href="<%=basePath%>jsp/views/urlFilter/urlFilter_mgr.jsp">拦截信息</a></dd>
+									</dl>
+			           		</li>
+			           	</shiro:hasAnyRoles>
+			           	<shiro:hasAnyRoles name="1,2">
+			           		<li class="layui-nav-item">
+								<a href="javascript:;" lay-tips="日志单元" lay-direction="2">
+									<i class="layui-icon">&#xe60e;</i>
+									<cite>日志单元</cite>
+								</a>
+								<shiro:hasAnyRoles name="1,2">
+									<shiro:hasRole name="2">
+										<dl class="layui-nav-child">
+											<dd><a lay-href="<%=basePath%>jsp/views/log/caozuo_log.jsp">操作信息日志</a></dd>
+										</dl>
+									</shiro:hasRole>
+									<dl class="layui-nav-child">
+										<dd><a lay-href="<%=basePath%>jsp/views/log/login_log.jsp">登录信息日志</a></dd>
 									</dl>
 								</shiro:hasAnyRoles>
 			           		</li>
@@ -199,7 +228,7 @@
 			parent.layer.open({
 				title: "密码修改",
 				type: 2,
-				area: ['600px','450px'],
+				area: ['600px','500px'],
 				content: '<%=basePath%>jsp/views/user/user_self_password.jsp',
 			});
 		};
