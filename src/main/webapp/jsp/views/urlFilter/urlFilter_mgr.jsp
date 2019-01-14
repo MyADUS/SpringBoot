@@ -8,6 +8,21 @@
 <title></title>
 </head>
 <body>
+	<!-- 搜索文本框-->
+	<div class="Table" style="text-align:center;margin-top:5px;">
+		<div class="layui-inline">
+			<input id="Information" class="layui-input" placeholder="请输入查询条件（支持：操作人/拦截路径/拦截方法）" style="width:620px" autocomplete="off">
+		</div>
+		<br/>
+		<div class="layui-inline" style="margin-top:5px;">
+			<span class="layui-btn" data-type="search">
+				<i class="layui-icon">&#xe615;</i>搜索
+			</span>
+			<span class="layui-btn layui-btn-primary" data-type="empty">
+				<i class="layui-icon">&#xe639;</i>清空查询条件
+			</span>
+		</div>
+	</div>
 	<div class="layui-fluid">
 		<div class="layui-card">
 			<div class="layui-col-md12 layui-col-space10">
@@ -41,7 +56,7 @@
 					{field: 'url', title: '拦截路径', align: 'center'},
 					{field: 'filter', title: '拦截方法', align: 'center'},
 					{field: 'czr', title: '操作人', align: 'center'},
-					{field: 'czrq', title: '操作日期', align: 'center'},
+					{field: 'czrq', title: '操作日期', sort: true, align: 'center'},
 				]],
 				page: true,
 			});
@@ -56,12 +71,25 @@
 						maxmin: true,
 						shade: [0.8, '#393D49'], // 遮罩  不要可以不写 或默认 0
 						shift: 5, // 渐显
-						area: ['740px', '300px'],
+						area: ['740px', '400px'],
 						content: '<%=basePath%>jsp/views/urlFilter/urlFilter_edit.jsp?type='+"add",
 						end: function(){
 							location.reload();
 			  			}
 					});
+				},
+				//查询
+				search: function(){
+			      	//执行重载
+			      	var Information = $("#Information").val(); 
+			      	table.reload('grid',{
+		        		page: {curr: 1},
+			        	where: {param: Information},
+			      	});
+			    },
+				//清空查询条件
+				empty: function(){
+					$("#Information").val(""); 
 				},
 			};
 			
@@ -76,7 +104,7 @@
 						maxmin: true,
 						shade: [0.8, '#393D49'], // 遮罩  不要可以不写 或默认 0
 						shift: 5, // 渐显
-						area: ['740px', '230px'],
+						area: ['740px', '330px'],
 						content: '<%=basePath%>jsp/views/urlFilter/urlFilter_edit.jsp?type='+"show",
 						success:function(layero) {
 			  				var Data = JSON.stringify(data);
@@ -90,7 +118,7 @@
 						maxmin: true,
 						shade: [0.8, '#393D49'], // 遮罩  不要可以不写 或默认 0
 						shift: 5, // 渐显
-						area: ['740px', '300px'],
+						area: ['740px', '400px'],
 						content: '<%=basePath%>jsp/views/urlFilter/urlFilter_edit.jsp?type='+"edit",
 						success:function(layero) {
 			  				var Data = JSON.stringify(data);
