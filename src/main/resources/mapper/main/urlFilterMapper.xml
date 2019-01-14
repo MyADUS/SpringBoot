@@ -11,18 +11,23 @@
         <result column="URL" property="url" jdbcType="VARCHAR" />
         <result column="FILTER" property="filter" jdbcType="VARCHAR" />
         <result column="PX" property="px" jdbcType="INTEGER" />
+        <result column="BZ" property="bz" jdbcType="VARCHAR" />
         <result column="CZR" property="czr" jdbcType="VARCHAR" />
         <result column="CZRQ" property="czrq" jdbcType="TIMESTAMP"/>
     </resultMap>
 
 	<sql id="Base_Column_List" >
-        id , url , filter , px , czr , czrq
+        id , url , filter , px , bz , czr , czrq
     </sql>
     
     <select id="getUrlFilter" resultMap="BaseResultMap">
     	SELECT
     	<include refid="Base_Column_List"></include>
-    	FROM URL_FILTER ORDER BY PX
+    	FROM URL_FILTER	WHERE 1 = 1
+    	<if test="_parameter != null and _parameter != ''">
+    		AND (CZR LIKE "%"#{_parameter}"%" OR URL LIKE "%"#{_parameter}"%" OR FILTER LIKE "%"#{_parameter}"%")
+    	</if>
+    	ORDER BY PX
     </select>
     
     <!-- <delete id="deleteUrlFilter">
