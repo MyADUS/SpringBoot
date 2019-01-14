@@ -1,6 +1,7 @@
 package com.test.shiro;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.codec.Base64;
@@ -9,10 +10,14 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.SimpleCommandLinePropertySource;
+
+import com.test.model.urlFilter;
+import com.test.service.urlFilterService;
 
 /**
  * 
@@ -23,7 +28,6 @@ import org.springframework.core.env.SimpleCommandLinePropertySource;
 @Configuration
 public class ShiroConfig {
 
-	
 	//rememberme无效	暂时不用
 	/*public SimpleCookie remembermeCookie() {
 		System.out.println("4");
@@ -48,7 +52,7 @@ public class ShiroConfig {
 	 * 创建ShiroFilterFactoryBean
 	 */
 	@Bean
-	public ShiroFilterFactoryBean getShiroFilterFactoryBean(/*@Qualifier("securityManager")*/ DefaultWebSecurityManager securityManager) {
+	public ShiroFilterFactoryBean getShiroFilterFactoryBean(/*@Qualifier("securityManager")*/ DefaultWebSecurityManager securityManager,ShiroService shiroservice) {
 		System.out.println("1");
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		//设置安全管理器
@@ -63,8 +67,7 @@ public class ShiroConfig {
 		 * 		perms:该资源必须得到资源权限才可以访问
 		 * 		roles:该资源必须得到角色权限才可以访问
 		 */
-		Map<String, String> filterMap = new LinkedHashMap<String, String>();
-		// 对直接请求后台方法进行拦截
+		/*// 对直接请求后台方法进行拦截
 		// 先对验证码等无需登录即可访问的方法设置无需拦截
 		filterMap.put("/noneed/*", "anon");
 		// 防止直接调用后台方法对数据库进行操作
@@ -72,7 +75,7 @@ public class ShiroConfig {
 		// 对多级别jsp页面进行拦截
 		// 防止未登录状态访问部分页面
 		filterMap.put("/jsp/views/**", "authc");
-		filterMap.put("/jsp/upload.jsp", "authc");
+		filterMap.put("/jsp/upload.jsp", "authc");*/
 		//资源授权
 		//filterMap.put("/jsp/test/*", "perms[1]");
 		//角色授权
@@ -81,7 +84,7 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setLoginUrl("/jsp/login.jsp");
 		//修改默认的提示没有权限页面
 		shiroFilterFactoryBean.setUnauthorizedUrl("/jsp/unAuth.jsp");
-		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+		shiroFilterFactoryBean.setFilterChainDefinitionMap(shiroservice.loadFilterChainDefinitions());
 		return shiroFilterFactoryBean;
 	}
 	/**
