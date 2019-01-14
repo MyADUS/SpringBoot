@@ -45,9 +45,9 @@ public class urlFilterController {
 	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/getUrlFilter")
-	public HashMap getUrlFilter(int page, int limit) throws Exception{
+	public HashMap getUrlFilter(String param, int page, int limit) throws Exception{
 		HashMap map = new HashMap();
-		List list = urlFilterService.getUrlFilter();
+		List list = urlFilterService.getUrlFilter(param);
 		map = getResult.getMapResult(list,page-1,limit);
 		return map;
 	}
