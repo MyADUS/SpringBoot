@@ -51,7 +51,7 @@ public class testController {
 	 * */
 	@InitBinder
 	public void init(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
 	}
 	
 	// 当对表中数据进行更新、添加、删除等操作时，调用此方法，重新缓存数据信息。
