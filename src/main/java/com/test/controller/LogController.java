@@ -34,7 +34,7 @@ public class LogController {
 	 * */
 	@InitBinder
 	public void init(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
 	}
 	
 	//查询所有登录信息
