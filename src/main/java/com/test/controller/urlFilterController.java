@@ -40,7 +40,7 @@ public class urlFilterController {
 	 * */
 	@InitBinder
 	public void init(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss"), true));
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
 	}
 	
 	@SuppressWarnings("rawtypes")
