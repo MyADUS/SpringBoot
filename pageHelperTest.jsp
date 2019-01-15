@@ -34,7 +34,7 @@
 <div class="m-style M-box4" id="test"></div>
 <script type="text/javascript">
 	//总页数
-	var pages = 0;
+	var pages = 0; 
 	//每页条数
 	var limit = 5;
 	
