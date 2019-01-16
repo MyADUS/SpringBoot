@@ -237,7 +237,7 @@
 		function Logout(){
 			parent.layer.confirm('确定注销吗？',{btn:['确定','取消']},function(){
 				$.ajax({
-					url : "<%=basePath%>logout",
+					url : "<%=basePath%>do/logout",
 					type: "POST",
 					cache: false,
 					async: false,
@@ -256,7 +256,7 @@
 		function removeRedis(){
 			parent.layer.confirm('确定清除缓存中的数据吗？',{btn:['确定','取消']},function(){
 				$.ajax({
-					url : "<%=basePath%>removeRedis",
+					url : "<%=basePath%>do/removeRedis",
 					type: "POST",
 					cache: false,
 					async: false,
