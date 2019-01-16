@@ -44,7 +44,7 @@ public class urlFilterController {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value="/getUrlFilter")
+	@RequestMapping(value="/do/getUrlFilter")
 	public HashMap getUrlFilter(String param, int page, int limit) throws Exception{
 		HashMap map = new HashMap();
 		List list = urlFilterService.getUrlFilter(param);
@@ -52,7 +52,7 @@ public class urlFilterController {
 		return map;
 	}
 	
-	@RequestMapping(value="/updateOrAddUrlFilter")
+	@RequestMapping(value="/do/updateOrAddUrlFilter")
 	public String updateOrAddUrlFilter(urlFilter urlfilter) throws Exception{
 		urlfilter.setCzr((String) session.getAttribute("username"));
 		urlfilter.setCzrq(new Date());
@@ -72,7 +72,7 @@ public class urlFilterController {
 		return res;
 	}
 	
-	@RequestMapping(value="/deleteUrlFilter")
+	@RequestMapping(value="/do/deleteUrlFilter")
 	public String deleteUrlFilter(int id) throws Exception{
 		int i = urlFilterService.deleteUrlFilter(id);
 		String res = "";
