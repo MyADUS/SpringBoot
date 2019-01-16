@@ -32,7 +32,9 @@ import com.test.util.RedisUpdate;
 import com.test.util.ShaUtil;
 import com.test.util.StringUtil;
 import com.test.util.getRealIp;
-import com.test.util.getResult;;
+import com.test.util.getResult;
+import com.test.util.gifcode.Captcha;
+import com.test.util.gifcode.GifCaptcha;;
 
 @RestController
 public class userController {
@@ -76,9 +78,15 @@ public class userController {
 		UsernamePasswordToken token = new UsernamePasswordToken(username,ShaUtil.shaEncode(password)/*,rememberme*/);
 		//3.执行登录方法
 		try {
+			// imagecode.toLowerCase().equals(session.getAttribute("_code").toString().toLowerCase())	gif验证码
 			if(imagecode.toLowerCase().equals(session.getAttribute("imagecode").toString().toLowerCase())) {
 				System.out.println("执行登录方法。。。");
 				subject.login(token);
+				//登录方法执行之后，清除session存储的验证码数据
+				session.removeAttribute("imagecode");
+				//session.removeAttribute("_code");
+				//登录成功之后，session中存入username
+				session.setAttribute("username", username);
 				//登录成功，进行日志记录
 				Log log = new Log();
 				//log.setIp(request.getRemoteAddr());
@@ -103,7 +111,7 @@ public class userController {
 	}
 	
 	//注销
-	@RequestMapping(value = "/logout")
+	@RequestMapping(value = "/do/logout")
 	public String logout() {
 		Subject subject = SecurityUtils.getSubject();
 		if(subject != null) {
@@ -140,7 +148,7 @@ public class userController {
 	}
 	
 	//批量重置密码，仅manager含有2的有权
-	@RequestMapping(value = "/rePassword")
+	@RequestMapping(value = "/do/rePassword")
 	public int rePassword(String[] ids) throws Exception{
 		int d = 0;
 		for(int i=0;i<ids.length;i++) {
@@ -187,7 +195,7 @@ public class userController {
 	
 	//查询注册了，但没有登录权限的人数
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/getCount0")
+	@RequestMapping(value = "/do/getCount0")
 	public ArrayList getCount0() throws Exception {
 		ArrayList list = userService.getCount0("0");
 		if(list != null) {
@@ -198,7 +206,7 @@ public class userController {
 	}
 	
 	//获取需要授权登录的人
-	@RequestMapping(value = "/mapManager0")
+	@RequestMapping(value = "/do/mapManager0")
 	public HashMap mapManager0(int page,int limit) throws Exception {
 		HashMap map = new HashMap();
   		List list = userService.mapManager0("0");
@@ -208,7 +216,7 @@ public class userController {
 	
 	//获取所有人员信息
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/mapManager")
+	@RequestMapping(value = "/do/mapManager")
 	public HashMap mapManager(int page,int limit) throws Exception {
 		HashMap map = new HashMap();
 		List list = null;
@@ -224,7 +232,7 @@ public class userController {
 	}
 	
 	//授权登录
-	@RequestMapping(value = "/ShouQuan")
+	@RequestMapping(value = "/do/ShouQuan")
 	public String ShouQuan(int id,String manager) throws Exception {
 		String str = "";
 		/*String newmanager = manager + ",1";*/
@@ -242,7 +250,7 @@ public class userController {
 	}
 	
 	//添加或更新操作
-	@RequestMapping("/updateOrAddUser")
+	@RequestMapping("/do/updateOrAddUser")
 	public String updateOrAddUser(user user) throws Exception{
 		int i = 0;
 		Date time = new Date();
@@ -261,7 +269,9 @@ public class userController {
 			return "no";
 		}
     }
-	
+	/**
+	 * 静态验证码
+	 */
 	@RequestMapping(value = "/noneed/imageCode")
 	public void imageCode() throws Exception{
 		Object[] obj = ImageCode.createImage();
@@ -272,6 +282,31 @@ public class userController {
 		ImageIO.write(img, "png", os);
 	}
 	
+	/**
+	 * 获取验证码（Gif版本）
+	 */
+	@RequestMapping(value="/noneed/gifCode")
+	public void getGifCode(){
+	    try {
+	        response.setHeader("Pragma", "No-cache");  
+	        response.setHeader("Cache-Control", "no-cache");  
+	        response.setDateHeader("Expires", 0);  
+	        response.setContentType("image/gif");  
+	        /**
+	         * gif格式动画验证码
+	         * 宽，高，位数。
+	         */
+	        Captcha captcha = new GifCaptcha(100,38,4);
+	        //输出
+	        captcha.out(response.getOutputStream());
+	        HttpSession session = request.getSession(true);  
+	        //存入Session
+	        session.setAttribute("_code",captcha.text().toLowerCase());  
+	    } catch (Exception e) {
+	        System.err.println("获取验证码异常："+e.getMessage());
+	    }
+	}
+
 	@RequestMapping(value="/noneed/sss")
 	public String sss() throws Exception{
 		user user = userService.sss();
