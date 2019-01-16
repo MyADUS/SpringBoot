@@ -34,7 +34,7 @@
 		//datagrid列表
 		table.render({
 			elem: '#datagrid',
-			url: '<%=basePath%>mapManager0',
+			url: '<%=basePath%>do/mapManager0',
 		    cols: [[
 		    	{type:'checkbox'},
 				{type:'numbers', title: '序号'},
@@ -69,7 +69,7 @@
 					var id = ids.join(',');
 					layer.confirm('确定批量重置密码吗？',{btn:['确定','取消']},function(){
 						$.ajax({
-							url : "<%=basePath%>rePassword",
+							url : "<%=basePath%>do/rePassword",
 							data: {ids:id},
 							type: "POST",
 							cache: false,
@@ -97,7 +97,7 @@
 			if(layevent == "ShouQuan"){
 				parent.layer.confirm('确定升级为管理员吗？',{title: "系统提示",anim: 6,icon: 3,closeBtn: 0},function(){
 					$.ajax({									
-						url : "<%=basePath%>ShouQuan?id="+data.id+"&manager="+"1",		
+						url : "<%=basePath%>do/ShouQuan?id="+data.id+"&manager="+"1",		
 						type: "POST",								
 						cache: false,							
 						async: false,							
