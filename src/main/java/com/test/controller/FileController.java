@@ -36,7 +36,7 @@ public class FileController {
      * @return
      * @throws Exception 
      */
-    @PostMapping("/upload")
+    @PostMapping("/do/upload")
     @ResponseBody
     public HashMap upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
     	String saveFileName = file.getOriginalFilename();
@@ -78,7 +78,7 @@ public class FileController {
     }
     
 
-    @PostMapping("/uploadFiles")
+    @PostMapping("/do/uploadFiles")
     @ResponseBody
     public HashMap uploadFiles(HttpServletRequest request) throws Exception {
     	// request.getSession().getServletContext().getRealPath("/upload/")
