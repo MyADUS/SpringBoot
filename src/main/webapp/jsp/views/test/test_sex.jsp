@@ -42,7 +42,7 @@
 			//datagrid列表
 			table.render({
 				elem: '#datagrid',
-				url: '<%=basePath%>getMapBySex?sex='+sex,
+				url: '<%=basePath%>do/getMapBySex?sex='+sex,
 			    cols: [[
 					{type:'numbers', title: '序号'},
 					{field:'name', title: '姓名'},
@@ -69,7 +69,7 @@
 					Data = JSON.stringify(table.cache.grid);
 					parent.layer.msg('数据正在导出中，请稍等...',{icon: 16,shade:0.4},function(){
 						$.ajax({
-							url:'<%=basePath%>ExcelExport',
+							url:'<%=basePath%>do/ExcelExport',
 							data:{data:Data},
 							type: "POST",
 							cache: false,
