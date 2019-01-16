@@ -41,7 +41,7 @@
 		var Value = [];
 		
 		$.ajax({
-			url: "<%=basePath%>getPieList",
+			url: "<%=basePath%>do/getPieList",
 			type: "POST",
 			async: false,
 			success: function(str){
