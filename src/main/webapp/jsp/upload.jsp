@@ -61,7 +61,7 @@
 			//单文件上传
 			upload.render({ //允许上传的文件后缀
 				elem: '#upload',
-				url: '<%=basePath%>upload',
+				url: '<%=basePath%>do/upload',
 				accept: 'file',
 				before: function(){
 					parent.layer.msg('数据正在导入中，请稍等...',{icon: 16,shade:0.4});
@@ -79,7 +79,7 @@
 			//单图片上传
 			upload.render({ //允许上传的文件后缀
 				elem: '#chooseIMG',
-				url: '<%=basePath%>upload',
+				url: '<%=basePath%>do/upload',
 				accept: 'images',
 				auto: false,
 				bindAction: '#uploadIMG',
@@ -111,7 +111,7 @@
 			var demoListView = $('#demoList');
 			upload.render({ //允许上传的文件后缀
 				elem: '#testList',
-				url: '<%=basePath%>uploadFiles',
+				url: '<%=basePath%>do/uploadFiles',
 				auto: false,// 设置选择文件后不自动上传
 				bindAction: '#testListAction',// 与auto:false配合使用，绑定上传按钮
 				accept: 'file',
