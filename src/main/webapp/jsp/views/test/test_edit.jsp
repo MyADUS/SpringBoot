@@ -90,17 +90,17 @@
 			});
 			
 			//监听提交
-			form.on('submit(submit)', function(data){debugger;
+			form.on('submit(submit)', function(data){
 				//防止重复增加
 				$(".layui-btn layui-btn-normal").addClass("layui-btn-disabled");
 				
 				$.ajax({
-					url: "<%=basePath%>updateOrAdd",
+					url: "<%=basePath%>do/updateOrAdd",
 					data: data.field,
 					type: "POST",
 					cache: false,
 					async: false,
-					success: function(res){debugger;
+					success: function(res){
 						if(res == "yes"){
 							parent.layer.alert("保存成功！",{title: "系统提示",icon: 1,closeBtn: 0},function(){
 								cancel();
