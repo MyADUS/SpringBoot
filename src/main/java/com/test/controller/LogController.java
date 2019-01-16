@@ -39,7 +39,7 @@ public class LogController {
 	
 	//查询所有登录信息
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/loginlog")
+	@RequestMapping(value = "/do/loginlog")
 	public HashMap loginlog(String param, int page, int limit) throws Exception {
 		HashMap map = new HashMap();
 		List list = null;
@@ -54,7 +54,7 @@ public class LogController {
 	
 	//查询不是登录操作的信息
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/caozuolog")
+	@RequestMapping(value = "/do/caozuolog")
 	public HashMap caozuolog(String param, int page, int limit) throws Exception {
 		HashMap map = new HashMap();
 		List list = null;
