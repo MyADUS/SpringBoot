@@ -77,7 +77,7 @@
 				$(".layui-btn layui-btn-normal").addClass("layui-btn-disabled");
 				
 				$.ajax({
-					url: "<%=basePath%>updateOrAddUser",
+					url: "<%=basePath%>do/updateOrAddUser",
 					data: data.field,
 					type: "POST",
 					cache: false,
