@@ -24,9 +24,6 @@
 		<div class="layui-card">
 			<div class="layui-col-md12 layui-col-space10">
 				<div class="Table layui-card-body">
-					<span class="layui-btn layui-btn-sm" data-type="rePassword">
-						<i class="layui-icon">&#xe601;</i>批量重置密码
-					</span>
 					<!-- grid列表 -->
 					<table id="datagrid" class="layui-table" lay-filter="Grid"></table>
 				</div>
@@ -47,7 +44,7 @@
 		//datagrid列表
 		table.render({
 			elem: '#datagrid',
-			url: '<%=basePath%>mapManager',
+			url: '<%=basePath%>do/mapManager',
 		    cols: [[
 		    	{type:'checkbox'},
 				{type:'numbers', title: '序号'},
@@ -88,7 +85,7 @@
 					var id = ids.join(',');
 					layer.confirm('确定批量重置密码吗？',{btn:['确定','取消']},function(){
 						$.ajax({
-							url : "<%=basePath%>rePassword",
+							url : "<%=basePath%>do/rePassword",
 							data: {ids:id},
 							type: "POST",
 							cache: false,
@@ -123,7 +120,7 @@
 				}else{
 					parent.layer.confirm('确定格式化吗？',{title: "系统提示",anim: 6,icon: 3,closeBtn: 0},function(){
 						$.ajax({									
-							url : "<%=basePath%>ShouQuan?id="+data.id+"&manager="+"0",		
+							url : "<%=basePath%>do/ShouQuan?id="+data.id+"&manager="+"0",		
 							type: "POST",								
 							cache: false,							
 							async: false,							
@@ -143,7 +140,7 @@
 			}else if(layevent == "ShouQuan"){
 				parent.layer.confirm('确定升级为管理员吗？',{title: "系统提示",anim: 6,icon: 3,closeBtn: 0},function(){
 					$.ajax({									
-						url : "<%=basePath%>ShouQuan?id="+data.id+"&manager="+"1",		
+						url : "<%=basePath%>do/ShouQuan?id="+data.id+"&manager="+"1",		
 						type: "POST",								
 						cache: false,							
 						async: false,							
@@ -162,7 +159,7 @@
 			}else if(layevent == "ShouQuanMore"){
 				parent.layer.confirm('确定释放权限吗？',{title: "系统提示",anim: 6,icon: 3,closeBtn: 0},function(){
 					$.ajax({									
-						url : "<%=basePath%>ShouQuan?id="+data.id+"&manager="+"2",		
+						url : "<%=basePath%>do/ShouQuan?id="+data.id+"&manager="+"2",		
 						type: "POST",								
 						cache: false,							
 						async: false,							
