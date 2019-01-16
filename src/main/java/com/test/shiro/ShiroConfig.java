@@ -67,6 +67,11 @@ public class ShiroConfig {
 		 * 		perms:该资源必须得到资源权限才可以访问
 		 * 		roles:该资源必须得到角色权限才可以访问
 		 */
+		
+		// 现在通过调用shiroservice.loadFilterChainDefinitions()方法，查询数据库表（url_filter），动态赋予拦截信息，
+		// 并且在有权限的人员在页面中对url_filter表进行增删改操作时，可以不用重启服务器，在urlFilterController中，当增删改操作正确执行后，
+		// 调用shiroservice.updatePermission(shiroFilterFactoryBean)方法，重新加载拦截权限，避免修改权限就要重启服务器造成的不便。
+		
 		/*// 对直接请求后台方法进行拦截
 		// 先对验证码等无需登录即可访问的方法设置无需拦截
 		filterMap.put("/noneed/*", "anon");
