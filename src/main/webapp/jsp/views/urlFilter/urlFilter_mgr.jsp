@@ -48,7 +48,7 @@
 			table.render({
 				id: 'grid',
 				elem: '#datagrid',
-				url: '<%=basePath%>getUrlFilter',
+				url: '<%=basePath%>do/getUrlFilter',
 				cols: [[
 					{type: 'checkbox'},
 					{type: 'numbers', title: '序号'},
