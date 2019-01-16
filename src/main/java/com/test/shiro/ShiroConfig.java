@@ -75,7 +75,10 @@ public class ShiroConfig {
 		// 对多级别jsp页面进行拦截
 		// 防止未登录状态访问部分页面
 		filterMap.put("/jsp/views/**", "authc");
-		filterMap.put("/jsp/upload.jsp", "authc");*/
+		filterMap.put("/jsp/upload.jsp", "authc");
+		// 拦截所有无需登录验证的方法，避免多级访问如（/test/test...）等访问路径不经过登录验证访问后台方法
+		// 在所有无需登录验证的方法前添加/do进行拦截控制
+		filterMap.put("/do/**", "authc");*/
 		//资源授权
 		//filterMap.put("/jsp/test/*", "perms[1]");
 		//角色授权
