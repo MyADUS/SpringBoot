@@ -46,6 +46,7 @@ public class testController {
 	// 注入更新缓存的方法
 	@Autowired
 	private RedisUpdate redisUpdate;
+	
 	/*
 	 * 表单中的日期字符串和JavaBean的Date类型的转换，而SpringMVC默认不支持这个格式的转换，所以需要手动配置，自定义数据的绑定才能解决这个问题。
 	 * */
@@ -64,20 +65,20 @@ public class testController {
 	}*/
 	
 	//测试mapper.xml
-	@RequestMapping(value = "/getPerson")
+	@RequestMapping(value = "/do/getPerson")
 	public userTest getPerson(int id) {
 		return userTestService.getPerson(id);
 	}
 	
 	//查询所有，返回list集合
-	@RequestMapping(value = "/listPerson")
+	@RequestMapping(value = "/do/listPerson")
     public List<userTest> getAll() {
         return userTestService.getAll();
     }
 	
 	//查询所有，返回map集合
   	@SuppressWarnings({"rawtypes" })
-  	@RequestMapping(value = "/mapPerson")
+  	@RequestMapping(value = "/do/mapPerson")
   	public HashMap getMapAll(int page,int limit) throws Exception {
   		HashMap map = new HashMap();
   		List list = null;
@@ -93,7 +94,7 @@ public class testController {
 	}  
     
 	//添加或更新操作
-	@RequestMapping("/updateOrAdd")
+	@RequestMapping("/do/updateOrAdd")
 	public String updateOrAdd(userTest userTest) throws Exception{
 		int i = 0;
 		Date time = new Date();
@@ -113,7 +114,7 @@ public class testController {
     }
 	
 	//删除操作
-	@RequestMapping(value = "/deletePerson")
+	@RequestMapping(value = "/do/deletePerson")
 	public String delete(HttpServletRequest request){
 		String ID = request.getParameter("id");
 		int id = Integer.parseInt(ID);
@@ -129,14 +130,14 @@ public class testController {
     }
 	
 	//Excel导出
-	@RequestMapping(value = "/ExcelExport")
+	@RequestMapping(value = "/do/ExcelExport")
 	public String ExcelExport(String data) throws Exception {
 		String path = ExcelExportUtil.getPoiExcelExportPath(ExcelExportUtil.getColumnWeigth(),ExcelExportUtil.getXzxkTitleName(),data);
 		return path;
     }
 	
 	//批量，删除操作
-	@RequestMapping(value = "/DeleteMany")
+	@RequestMapping(value = "/do/DeleteMany")
 	public int DeleteMany(String[] ids){
 		int d = 0;
 		for(int i=0;i<ids.length;i++) {
@@ -158,14 +159,14 @@ public class testController {
 	
 	//男女比例查询
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/getPieList")
+	@RequestMapping(value = "/do/getPieList")
 	public List getPieList(){
 		List list = userTestService.getPieList();
 		return list;
     }
 	
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/getMapBySex")
+	@RequestMapping(value = "/do/getMapBySex")
   	public HashMap getMapBySex(int sex,int page,int limit) throws Exception {
   		HashMap map = new HashMap();
   		List list = userTestService.getMapBySex(sex);
