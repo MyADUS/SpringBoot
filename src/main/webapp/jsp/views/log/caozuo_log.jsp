@@ -11,7 +11,7 @@
 	<!-- 搜索文本框-->
 	<div class="Table" style="text-align:center;margin-top:5px;">
 		<div class="layui-inline">
-			<input id="Information" class="layui-input" placeholder="请输入查询条件（支持：用户名/IP地址）" style="width:620px" autocomplete="off">
+			<input id="Information" class="layui-input" placeholder="请输入查询条件（支持：用户名/IP地址/操作方法）" style="width:620px" autocomplete="off">
 		</div>
 		<br/>
 		<div class="layui-inline" style="margin-top:5px;">
@@ -46,7 +46,7 @@
 		//datagrid列表
 		table.render({
 			elem: '#datagrid',
-			url: '<%=basePath%>caozuolog',
+			url: '<%=basePath%>do/caozuolog',
 		    cols: [[
 				{type:'numbers', title: '序号'},
 				{field:'czr', title: '用户名'},
