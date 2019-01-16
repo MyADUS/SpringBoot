@@ -46,7 +46,7 @@
 		//datagrid列表
 		table.render({
 			elem: '#datagrid',
-			url: '<%=basePath%>loginlog',
+			url: '<%=basePath%>do/loginlog',
 		    cols: [[
 				{type:'numbers', title: '序号'},
 				{field:'czr', title: '用户名'},
