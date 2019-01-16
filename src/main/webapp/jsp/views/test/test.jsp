@@ -112,11 +112,10 @@
 		layui.use(['table'],function(){
 			var table = layui.table;
 			
-			//获取参数
 			//datagrid列表
 			table.render({
 				elem: '#datagrid',
-				url: '<%=basePath%>mapPerson',
+				url: '<%=basePath%>do/mapPerson',
 			    cols: [[
 					{type:'checkbox'},
 					{type:'numbers', title: '序号'},
@@ -189,7 +188,7 @@
 					Data = JSON.stringify(table.cache.grid);
 					parent.layer.msg('数据正在导出中，请稍等...',{icon: 16,shade:0.4},function(){
 						$.ajax({
-							url:'<%=basePath%>ExcelExport',
+							url:'<%=basePath%>do/ExcelExport',
 							data:{data:Data},
 							type: "POST",
 							cache: false,
@@ -222,7 +221,7 @@
 					}else{
 						parent.layer.msg('数据正在导出中，请稍等...',{icon: 16,shade:0.4},function(){
 							$.ajax({
-								url:'<%=basePath%>ExcelExport',
+								url:'<%=basePath%>do/ExcelExport',
 								data:{data:Data},
 								type: "POST",
 								cache: false,
@@ -261,7 +260,7 @@
 						var id = ids.join(',');
 						layer.confirm('确定批量删除吗？',{btn:['确定','取消']},function(){
 							$.ajax({
-								url : "<%=basePath%>DeleteMany",
+								url : "<%=basePath%>do/DeleteMany",
 								data: {ids:id},
 								type: "POST",
 								cache: false,
@@ -376,7 +375,7 @@
 				}else if(layevent == "Delete"){
 					parent.layer.confirm('确定删除吗？',{title: "系统提示",anim: 6,icon: 3,closeBtn: 0},function(){
 						$.ajax({									
-							url : "<%=basePath%>deletePerson?id="+data.id,		
+							url : "<%=basePath%>do/deletePerson?id="+data.id,		
 							type: "POST",								
 							cache: false,							
 							async: false,							
