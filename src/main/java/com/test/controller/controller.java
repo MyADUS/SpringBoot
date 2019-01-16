@@ -24,7 +24,7 @@ public class controller {
 	@Autowired
     private RedisService redisService;
     
-	@RequestMapping("/JSPindex")
+	@RequestMapping("/noneed/JSPindex")
 	public String JSPindex() {
 		return "JSPindex";
 	}
@@ -53,7 +53,7 @@ public class controller {
 	}
 	
 	@ResponseBody
-	@RequestMapping("/removeRedis")
+	@RequestMapping("/do/removeRedis")
 	public String removeRedis() {
 		redisService.remove("list");
 		redisService.remove("mapManagerList");
@@ -66,6 +66,30 @@ public class controller {
 	public Object testRedis() {
 		Object s = redisService.get("list");
 		return s;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/test")
+	public String test() {
+		return "test";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/do/test")
+	public String testtest() {
+		return "testtest";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/do/test/test")
+	public String testtesttest() {
+		return "testtesttest";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/do/test/test/test")
+	public String testtesttesttest() {
+		return "testtesttesttest";
 	}
 	
 	/*@ResponseBody
