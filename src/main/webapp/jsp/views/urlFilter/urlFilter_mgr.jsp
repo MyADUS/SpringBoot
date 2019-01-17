@@ -131,7 +131,7 @@
 				}else if(layevent == "Delete"){
 					parent.layer.confirm('确认删除吗',{title: "系统提示",anim: 6,icon: 3,closeBtn: 0},function(){
 						$.ajax({
-							url : "<%=basePath %>deleteUrlFilter",		
+							url : "<%=basePath %>do/deleteUrlFilter",		
 							data: {id:data.id},							
 							type: "POST",								
 							cache: false,							
