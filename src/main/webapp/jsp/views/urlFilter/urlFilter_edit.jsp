@@ -53,6 +53,10 @@
 		var type = "<%=request.getParameter("type")%>";
 		if(type == "show"){
 			$("#btn").hide();
+			//input框只读
+			$('input').attr('readonly','readonly');
+			//文本框只读
+			$('textarea').attr('readonly','readonly');
 		}
 		
 		form.verify({  
